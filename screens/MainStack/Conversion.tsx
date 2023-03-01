@@ -1,30 +1,28 @@
 import {
-  SafeAreaView,
   Text,
   StyleSheet,
   View,
   TextInput,
-  TextInputChangeEventData,
-  NativeSyntheticEvent,
+  Pressable,
+  Settings,
 } from 'react-native'
 import React, { useState } from 'react'
 import Container from '../../Components/Container'
-import {
-  calculateArabic,
-  calculateRoman,
-  lookup,
-} from '../../hooks/CalculateRoman'
+import { calculateRoman, lookup } from '../../hooks/CalculateRoman'
 import { ConversionTable } from '../../interfaces/conversionTable'
 import colors from '../../styles/colors'
+import { LucideSettings } from 'lucide-react-native'
+import { ParamListBase, useNavigation } from '@react-navigation/native'
+import { StackNavigationProp } from '@react-navigation/stack/lib/typescript/src/types'
 
 const Conversion = () => {
   const [romanNumber, setRomanNumber] = useState('')
   const [steps, setSteps] = useState<ConversionTable>({})
   const [hasDetails, setHasDetails] = useState<boolean>(false)
   const calculateRomanNumber = (e?: string) => {
-    if (e === "") {
+    if (e === '') {
       setHasDetails(false)
-      setRomanNumber("")
+      setRomanNumber('')
       return
     }
     setHasDetails(true)
@@ -33,7 +31,7 @@ const Conversion = () => {
     setSteps(steps)
   }
 
-  const getDetails = () : JSX.Element[] => {
+  const getDetails = (): JSX.Element[] => {
     const list = []
     for (const type in steps) {
       if (steps[type] === 0) continue
@@ -54,10 +52,15 @@ const Conversion = () => {
       </View>
     )
   }
+  const { navigate } =
+    useNavigation<StackNavigationProp<ParamListBase, 'LabStack'>>()
 
   return (
     <>
       <Container>
+        <Pressable onPress={() => navigate('settings')}>
+          <LucideSettings size={32} color={colors.primary['100']} />
+        </Pressable>
         <TextInput
           placeholder={'eg. 768'}
           style={styles.input}

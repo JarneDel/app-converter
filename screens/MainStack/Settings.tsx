@@ -1,13 +1,32 @@
 import Container from '../../Components/Container'
-import { Text } from 'react-native'
-import React from 'react'
+import { Switch, Text, View , StyleSheet, Settings as appSettings} from 'react-native'
+import React, { useState } from 'react'
 
 const Settings = () => {
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => {
+    setIsEnabled(previousState => !previousState)
+  };
   return (
     <Container>
-      <Text>Settings</Text>
+      <View style={styles.horizontal}>
+        <Text>Use Modern Roman Numbers</Text>
+        <Switch
+          onValueChange={toggleSwitch}
+          value={isEnabled}
+        />
+      </View>
+
     </Container>
   )
 }
 
 export default Settings
+
+const styles = StyleSheet.create({
+  horizontal: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  }
+})

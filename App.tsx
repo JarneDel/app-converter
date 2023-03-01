@@ -4,11 +4,13 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 
 import Conversion from "./screens/MainStack/Conversion";
-import React from "react";
+import React, { useState } from 'react'
+import Settings from './screens/MainStack/Settings'
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  const [settings, setSettings] = useState(null);
   return (
       <NavigationContainer>
         <Stack.Navigator>
@@ -23,7 +25,7 @@ export default function App() {
           />
           <Stack.Screen
             name="settings"
-            component={Conversion}
+            component={Settings}
             options={{
               title: "Settings",
               headerShown: true,
