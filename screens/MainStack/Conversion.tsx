@@ -58,17 +58,20 @@ const Conversion = () => {
   return (
     <>
       <Container>
-        <Pressable onPress={() => navigate('settings')}>
-          <LucideSettings size={32} color={colors.primary['100']} />
-        </Pressable>
-        <TextInput
-          placeholder={'eg. 768'}
-          style={styles.input}
-          keyboardType={'number-pad'}
-          inputMode={'numeric'}
-          maxLength={4}
-          onChangeText={calculateRomanNumber}
-        />
+        <View style={styles.reverse}>
+          <Pressable onPress={() => navigate('settings')}>
+            <LucideSettings size={32} color={colors.primary['100']} />
+          </Pressable>
+          <TextInput
+            placeholder={'eg. 768'}
+            style={styles.input}
+            keyboardType={'number-pad'}
+            inputMode={'numeric'}
+            maxLength={4}
+            onChangeText={calculateRomanNumber}
+          />
+        </View>
+
         <Text style={styles.roman}>{romanNumber}</Text>
         {getDetailsContainer()}
       </Container>
@@ -86,6 +89,7 @@ const styles = StyleSheet.create({
     marginVertical: 8,
   },
   input: {
+    flex: 1,
     color: 'black',
     fontSize: 32,
     fontWeight: '500',
@@ -112,4 +116,11 @@ const styles = StyleSheet.create({
     backgroundColor: colors.neutral['200'],
     padding: 8,
   },
+  reverse: {
+    flexDirection: 'row-reverse',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    gap: 8,
+  },
+
 })
